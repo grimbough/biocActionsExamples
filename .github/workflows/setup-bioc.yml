@@ -9,7 +9,7 @@ jobs:
     
     steps:
       - name: Setup R and Bioconductor
-        uses: grimbough/bioc-actions/setup-bioc@master
+        uses: grimbough/bioc-actions/setup-bioc@v0
         with:
           bioc-version: devel
           

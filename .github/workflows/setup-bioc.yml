@@ -1,0 +1,15 @@
+on:
+  push:
+  
+name: Testing Bioc Setup
+
+jobs:
+  Testing:
+    runs-on: ubuntu-20.04
+    
+    steps:
+      - name: Setup R and Bioconductor
+        uses: grimbough/bioc-actions/setup-bioc@master
+        with:
+          bioc-version: devel
+          

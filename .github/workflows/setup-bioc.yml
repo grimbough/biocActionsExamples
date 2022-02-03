@@ -1,5 +1,6 @@
 on:
-  push:
+  push
+  workflow_dispatch
   
 name: Testing Bioc Setup
 

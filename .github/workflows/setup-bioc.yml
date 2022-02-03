@@ -6,7 +6,7 @@ name: Testing Bioc Setup
 
 jobs:
   Testing:
-    runs-on: ubuntu-20.04
+    runs-on: [ubuntu-20.04, windows-2022, macos-11]
     
     steps:
       - name: Setup R and Bioconductor

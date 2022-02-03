@@ -21,4 +21,5 @@ jobs:
         uses: grimbough/bioc-actions/setup-bioc@v0
         with:
           bioc-version: devel
+          bioc-mirror: https://ftp.gwdg.de/pub/misc/bioconductor
           

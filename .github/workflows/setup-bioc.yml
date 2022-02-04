@@ -23,3 +23,8 @@ jobs:
           bioc-version: devel
           bioc-mirror: https://ftp.gwdg.de/pub/misc/bioconductor
           
+      - name: Run BiocCheck
+        uses: grimbough/bioc-actions/run-bioc-check@v0
+        with:
+          working-directory: examplePKG
+          arguments: --no-check-bioc-views

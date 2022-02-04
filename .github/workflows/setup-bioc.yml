@@ -4,7 +4,8 @@ on:
   
 name: Testing Bioc Setup
 
-
+env:
+  GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
   Testing:

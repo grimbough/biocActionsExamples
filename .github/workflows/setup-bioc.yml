@@ -7,7 +7,7 @@ name: Testing Bioc Setup
 
 
 jobs:
-  Testing an example package:
+  Testing:
   
     strategy:
       fail-fast: false

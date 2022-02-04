@@ -7,7 +7,7 @@ name: Testing Bioc Setup
 
 
 jobs:
-  Testing:
+  Testing an example package:
   
     strategy:
       fail-fast: false
@@ -17,6 +17,9 @@ jobs:
     runs-on: ${{ matrix.os }}
     
     steps:
+    
+      - uses: actions/checkout@v2
+          
       - name: Setup R and Bioconductor
         uses: grimbough/bioc-actions/setup-bioc@v0
         with:
@@ -26,5 +29,5 @@ jobs:
       - name: Run BiocCheck
         uses: grimbough/bioc-actions/run-bioc-check@v0
         with:
-          working-directory: examplePKG
+          working-directory: 'examplePKG'
           arguments: --no-check-bioc-views

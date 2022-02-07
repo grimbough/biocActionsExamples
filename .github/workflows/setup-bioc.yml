@@ -6,8 +6,7 @@ name: Testing Bioc Setup
 
 env:
   GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-  R_LIBS_USER: /ci/lib
-      
+
 jobs:
   Testing:
   

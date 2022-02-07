@@ -37,5 +37,5 @@ jobs:
         uses: grimbough/bioc-actions/run-bioc-check@v0
         with:
           working-directory: 'examplePKG'
-          arguments: --no-check-bioc-views
+          arguments: '--no-check-bioc-views --no-check-bioc-help'
           error-on: 'never'

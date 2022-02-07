@@ -38,3 +38,4 @@ jobs:
         with:
           working-directory: 'examplePKG'
           arguments: --no-check-bioc-views
+          error-on: 'never'

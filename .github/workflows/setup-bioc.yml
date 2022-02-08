@@ -33,8 +33,14 @@ jobs:
           path: ${{ env.R_LIBS_USER }}
           key: ${{ matrix.os }}-1
           
-      - name: Run BiocCheck
-        uses: grimbough/bioc-actions/run-bioc-check@v0
+      - name: Run BiocCheck without arguments
+        uses: grimbough/bioc-actions/run-bioc-check@main
+        with:
+          working-directory: 'examplePKG'
+          error-on: 'never'
+          
+      - name: Run BiocCheck with arguments
+        uses: grimbough/bioc-actions/run-bioc-check@main
         with:
           working-directory: 'examplePKG'
           arguments: '--no-check-bioc-views --no-check-bioc-help'

@@ -32,7 +32,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ${{ env.R_LIBS_USER }}
-          key: ${{ matrix.os }}-${{ bioc-version}}-1
+          key: ${{ matrix.os }}-${{ matrix.bioc-version}}-1
           
       - name: Run BiocCheck without arguments
         uses: grimbough/bioc-actions/run-bioc-check@v0

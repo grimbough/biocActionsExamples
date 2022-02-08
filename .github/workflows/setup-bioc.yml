@@ -14,7 +14,8 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-20.04, windows-2022, macos-11]
-  
+        bioc-version: [devel, release]
+        
     runs-on: ${{ matrix.os }}
     
     steps:
@@ -24,14 +25,14 @@ jobs:
       - name: Setup R and Bioconductor
         uses: grimbough/bioc-actions/setup-bioc@v0
         with:
-          bioc-version: devel
+          bioc-version: ${{ matrix.bioc-version }}
           bioc-mirror: https://ftp.gwdg.de/pub/misc/bioconductor
           
       - name: Cache R packages
         uses: actions/cache@v2
         with:
           path: ${{ env.R_LIBS_USER }}
-          key: ${{ matrix.os }}-1
+          key: ${{ matrix.os }}-${{ bioc-version}}-1
           
       - name: Run BiocCheck without arguments
         uses: grimbough/bioc-actions/run-bioc-check@v0

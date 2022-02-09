@@ -42,7 +42,7 @@ jobs:
           
       - uses: actions/upload-artifact@v2
         with:
-          name: RcheckDir
+          name: ${{ matrix.os }}-bioc-${{ matrix.bioc-version}}.RcheckDir
           path: ./examplePKG.Rcheck
           
       - name: Run BiocCheck without arguments

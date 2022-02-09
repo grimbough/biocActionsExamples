@@ -36,6 +36,8 @@ jobs:
           
       - name: Build, Install, Check 
         uses: grimbough/bioc-actions/run-bic@v0
+        with:
+          package-directory: 'examplePKG'
           
       - name: Run BiocCheck without arguments
         uses: grimbough/bioc-actions/run-bioc-check@v0

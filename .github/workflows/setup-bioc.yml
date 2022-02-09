@@ -36,8 +36,14 @@ jobs:
           
       - name: Build, Install, Check 
         uses: grimbough/bioc-actions/run-bic@v0
+        continue-on-error: true
         with:
           package-directory: 'examplePKG'
+          
+      - uses: actions/upload-artifact@v2
+        with:
+          name: RcheckDir
+          path: ./examplePKG.Rcheck
           
       - name: Run BiocCheck without arguments
         uses: grimbough/bioc-actions/run-bioc-check@v0

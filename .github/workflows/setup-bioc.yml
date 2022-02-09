@@ -34,6 +34,9 @@ jobs:
           path: ${{ env.R_LIBS_USER }}
           key: ${{ matrix.os }}-${{ matrix.bioc-version}}-1
           
+      - name: Build, Install, Check 
+        uses: grimbough/bioc-actions/run-bic@v0
+          
       - name: Run BiocCheck without arguments
         uses: grimbough/bioc-actions/run-bioc-check@v0
         with:

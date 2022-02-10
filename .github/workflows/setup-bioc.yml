@@ -42,10 +42,8 @@ jobs:
           
       - uses: actions/upload-artifact@v2
         with:
-        - name: ${{ matrix.os }}-bioc-${{ matrix.bioc-version}}.RcheckDir
+          name: ${{ matrix.os }}-bioc-${{ matrix.bioc-version}}.RcheckDir
           path: ./examplePKG.Rcheck
-        - name: ${{ matrix.os }}-bioc-${{ matrix.bioc-version}}-tarball
-          path: ./*.tar.gz
           
       - name: Run BiocCheck without arguments
         uses: grimbough/bioc-actions/run-bioc-check@v0

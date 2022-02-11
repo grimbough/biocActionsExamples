@@ -37,6 +37,7 @@ jobs:
       - uses: r-lib/actions/setup-tinytex@v2
       - name: Install latex fonts
         run: |
+          tlmgr update --self
           tlmgr install courier
           
       - name: Build, Install, Check 

@@ -35,14 +35,17 @@ jobs:
           key: ${{ matrix.os }}-${{ matrix.bioc-version}}-1
           
       - uses: r-lib/actions/setup-tinytex@v2
+      - name: Install latex fonts
+        run: |
+          tlmgr install courier
           
       - name: Build, Install, Check 
         uses: grimbough/bioc-actions/run-bic@v0
-        continue-on-error: true
         with:
           package-directory: 'examplePKG'
           
       - uses: actions/upload-artifact@v2
+        if: failure()
         with:
           name: ${{ matrix.os }}-bioc-${{ matrix.bioc-version}}.RcheckDir
           path: ./examplePKG.Rcheck

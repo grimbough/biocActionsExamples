@@ -34,12 +34,6 @@ jobs:
           path: ${{ env.R_LIBS_USER }}
           key: ${{ matrix.os }}-${{ matrix.bioc-version}}-1
           
-      - uses: r-lib/actions/setup-tinytex@v2
-      - name: Install latex fonts
-        run: |
-          tlmgr update --self
-          tlmgr install courier
-          
       - name: Build, Install, Check 
         uses: grimbough/bioc-actions/run-bic@v0
         with:

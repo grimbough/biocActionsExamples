@@ -55,10 +55,16 @@ jobs:
           error-on: 'never'
 
       ## upload some results files
-      - name: Upload output
+      - name: Upload Rcheck folder
         uses: actions/upload-artifact@v2
         with:
-          name: ${{ matrix.os }}-bioc-${{ matrix.bioc-version}}
+          name: ${{ matrix.os }}-bioc-${{ matrix.bioc-version}}-Rcheck
           path: |
             ${{ steps.build-install-check.outputs.check-dir }}
+
+      - name: Upload Source Tarball
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ matrix.os }}-bioc-${{ matrix.bioc-version}}-tarball
+          path: |
             ${{ steps.build-install-check.outputs.source-tarball }}

@@ -2,7 +2,7 @@ on:
   push:
   workflow_dispatch:
   
-name: Testing Bioc Setup
+name: Testing package repo
 
 env:
   GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
@@ -40,12 +40,6 @@ jobs:
         with:
           package-directory: '.'
           
-      - uses: actions/upload-artifact@v2
-        if: failure()
-        with:
-          name: ${{ matrix.os }}-bioc-${{ matrix.bioc-version}}.RcheckDir
-          path: ${{ steps.build-install-check.outputs.check-dir }}
-          
       - name: Run BiocCheck without arguments
         uses: grimbough/bioc-actions/run-bioc-check@v0
         with:
@@ -58,3 +52,12 @@ jobs:
           working-directory: '.'
           arguments: '--no-check-bioc-views --no-check-bioc-help'
           error-on: 'never'
+
+      ## upload some results files
+      - name: Upload output
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ matrix.os }}-bioc-${{ matrix.bioc-version}}
+          path: |
+            ${{ steps.build-install-check.outputs.check-dir }}
+            ${{ steps.build-install-check.outputs.source-tarball }}

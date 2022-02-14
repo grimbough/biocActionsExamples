@@ -1,0 +1,56 @@
+on:
+  push:
+  workflow_dispatch:
+  
+name: Testing nested package
+
+env:
+  GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  Testing:
+  
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-20.04, windows-2022, macos-11]
+        bioc-version: [release]
+        
+    runs-on: ${{ matrix.os }}
+    
+    steps:
+    
+      - uses: actions/checkout@v2
+          
+      - name: Setup R and Bioconductor
+        uses: grimbough/bioc-actions/setup-bioc@v0
+        with:
+          bioc-version: ${{ matrix.bioc-version }}
+          bioc-mirror: https://ftp.gwdg.de/pub/misc/bioconductor
+          
+      - name: Cache R packages
+        uses: actions/cache@v2
+        with:
+          path: ${{ env.R_LIBS_USER }}
+          key: ${{ matrix.os }}-${{ matrix.bioc-version}}-1
+          
+      - name: Build, Install, Check
+        id: build-install-check
+        uses: grimbough/bioc-actions/build-install-check@v0
+        with:
+          package-directory: 'inst/nestedPKG'
+          
+      - name: Run BiocCheck without arguments
+        uses: grimbough/bioc-actions/run-bioc-check@v0
+        with:
+          working-directory: 'inst/nestedPKG'
+          error-on: 'never'
+          
+      ## upload some results files
+      - name: Upload output
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ matrix.os }}-bioc-${{ matrix.bioc-version}}-nested
+          path: |
+            ${{ steps.build-install-check.outputs.check-dir }}
+            ${{ steps.build-install-check.outputs.source-tarball }}

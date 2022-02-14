@@ -35,25 +35,25 @@ jobs:
           key: ${{ matrix.os }}-${{ matrix.bioc-version}}-1
           
       - name: Build, Install, Check 
-        uses: grimbough/bioc-actions/run-bic@v0
+        uses: grimbough/bioc-actions/build-install-check@v0
         with:
-          package-directory: 'examplePKG'
+          package-directory: '.'
           
       - uses: actions/upload-artifact@v2
         if: failure()
         with:
           name: ${{ matrix.os }}-bioc-${{ matrix.bioc-version}}.RcheckDir
-          path: ./examplePKG.Rcheck
+          path: ../examplePKG.Rcheck
           
       - name: Run BiocCheck without arguments
         uses: grimbough/bioc-actions/run-bioc-check@v0
         with:
-          working-directory: 'examplePKG'
+          working-directory: '.'
           error-on: 'never'
           
       - name: Run BiocCheck with arguments
         uses: grimbough/bioc-actions/run-bioc-check@v0
         with:
-          working-directory: 'examplePKG'
+          working-directory: '.'
           arguments: '--no-check-bioc-views --no-check-bioc-help'
           error-on: 'never'

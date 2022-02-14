@@ -34,7 +34,8 @@ jobs:
           path: ${{ env.R_LIBS_USER }}
           key: ${{ matrix.os }}-${{ matrix.bioc-version}}-1
           
-      - name: Build, Install, Check 
+      - name: Build, Install, Check
+        id: build-install-check
         uses: grimbough/bioc-actions/build-install-check@v0
         with:
           package-directory: '.'
@@ -43,7 +44,7 @@ jobs:
         if: failure()
         with:
           name: ${{ matrix.os }}-bioc-${{ matrix.bioc-version}}.RcheckDir
-          path: ../examplePKG.Rcheck
+          path: ${{ steps.build-install-check.outputs.check-dir }}
           
       - name: Run BiocCheck without arguments
         uses: grimbough/bioc-actions/run-bioc-check@v0

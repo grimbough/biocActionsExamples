@@ -59,10 +59,10 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: ${{ matrix.os }}-bioc-${{ matrix.bioc-version}}-Rcheck
-          path: ${{ github.workspace }}/${{ steps.build-install-check.outputs.check-dir }}
+          path: ${{ steps.build-install-check.outputs.check-dir }}
 
       - name: Upload Source Tarball
         uses: actions/upload-artifact@v2
         with:
           name: ${{ matrix.os }}-bioc-${{ matrix.bioc-version}}-tarball
-          path: ${{ github.workspace }}/${{ steps.build-install-check.outputs.source-tarball }}
+          path: ${{ steps.build-install-check.outputs.source-tarball }}

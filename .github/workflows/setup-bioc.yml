@@ -14,8 +14,8 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-20.04, windows-2022, macos-11]
-        bioc-version: [devel, release]
-        #bioc-version: [release]
+        #bioc-version: [devel, release]
+        bioc-version: [release]
         
     runs-on: ${{ matrix.os }}
     
@@ -59,12 +59,10 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: ${{ matrix.os }}-bioc-${{ matrix.bioc-version}}-Rcheck
-          path: |
-            ${{ steps.build-install-check.outputs.check-dir }}
+          path: ${{ github.workspace }}/${{ steps.build-install-check.outputs.check-dir }}
 
       - name: Upload Source Tarball
         uses: actions/upload-artifact@v2
         with:
           name: ${{ matrix.os }}-bioc-${{ matrix.bioc-version}}-tarball
-          path: |
-            ${{ steps.build-install-check.outputs.source-tarball }}
+          path: ${{ github.workspace }}/${{ steps.build-install-check.outputs.source-tarball }}

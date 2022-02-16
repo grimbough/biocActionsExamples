@@ -44,7 +44,7 @@ jobs:
       ## Turn off the checks that we know will fail
       ## Cause the workflow to error if any new errors appear
       - name: Run BiocCheck with arguments
-        uses: grimbough/bioc-actions/run-bioc-check@v0
+        uses: grimbough/bioc-actions/run-BiocCheck@v0
         with:
           working-directory: '.'
           arguments: '--no-check-bioc-views --no-check-vignettes --no-check-bioc-help'

@@ -9,3 +9,7 @@ hello_world()
 \description{
 An example function
 }
+\examples{
+hello_world()
+
+}

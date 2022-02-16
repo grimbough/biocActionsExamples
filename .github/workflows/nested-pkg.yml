@@ -2,7 +2,7 @@ on:
   push:
   workflow_dispatch:
   
-name: Testing nested package
+name: Nested package
 
 env:
   GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
@@ -13,7 +13,6 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        #os: [ubuntu-20.04, windows-2022, macos-11]
         os: [ubuntu-20.04]
         bioc-version: [release]
         
@@ -27,7 +26,7 @@ jobs:
         uses: grimbough/bioc-actions/setup-bioc@v0
         with:
           bioc-version: ${{ matrix.bioc-version }}
-          bioc-mirror: https://ftp.gwdg.de/pub/misc/bioconductor
+          bioc-mirror: https://packagemanager.rstudio.com/bioconductor
           
       - name: Cache R packages
         uses: actions/cache@v2
@@ -42,7 +41,7 @@ jobs:
           package-directory: 'inst/nestedPKG'
           
       - name: Run BiocCheck without arguments
-        uses: grimbough/bioc-actions/run-bioc-check@v0
+        uses: grimbough/bioc-actions/run-BiocCheck@v0
         with:
           working-directory: 'inst/nestedPKG'
           error-on: 'never'

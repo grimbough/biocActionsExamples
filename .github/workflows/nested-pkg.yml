@@ -21,7 +21,10 @@ jobs:
     steps:
     
       - uses: actions/checkout@v2
-          
+      
+      ## We only using Ubuntu and BioC-release here, 
+      ## so lets use the Rstudio package manager
+      ## to install binary linux packages
       - name: Setup R and Bioconductor
         uses: grimbough/bioc-actions/setup-bioc@v0
         with:
@@ -39,7 +42,9 @@ jobs:
         uses: grimbough/bioc-actions/build-install-check@v0
         with:
           package-directory: 'inst/nestedPKG'
-          
+      
+      ## Run all tests in BiocCheck, include those we know fail
+      ## Use the 'error-on' to prevent this failing the workflow
       - name: Run BiocCheck without arguments
         uses: grimbough/bioc-actions/run-BiocCheck@v0
         with:

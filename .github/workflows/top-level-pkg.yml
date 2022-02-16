@@ -14,9 +14,9 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-20.04, windows-2022, macos-11]
-        #bioc-version: [devel, release]
-        bioc-version: [release]
-        
+        ## Test using both Bioconductor devel and release
+        bioc-version: [devel, release]
+
     runs-on: ${{ matrix.os }}
     
     steps:
@@ -41,23 +41,21 @@ jobs:
         with:
           package-directory: '.'
       
-      ## Turn     
+      ## Turn off the checks that we know will fail
+      ## Cause the workflow to error if any new errors appear
       - name: Run BiocCheck with arguments
         uses: grimbough/bioc-actions/run-bioc-check@v0
         with:
           working-directory: '.'
           arguments: '--no-check-bioc-views --no-check-vignettes --no-check-bioc-help'
-          error-on: 'never'
+          error-on: 'error'
 
       ## upload some results files
       - name: Upload Rcheck folder
         uses: actions/upload-artifact@v2
         with:
-          name: ${{ matrix.os }}-bioc-${{ matrix.bioc-version}}-Rcheck
-          path: ${{ steps.build-install-check.outputs.check-dir }}
+          name: ${{ matrix.os }}-bioc-${{ matrix.bioc-version}}
+          path: |
+            ${{ steps.build-install-check.outputs.check-dir }}
+            ${{ steps.build-install-check.outputs.source-tarball }}
 
-      - name: Upload Source Tarball
-        uses: actions/upload-artifact@v2
-        with:
-          name: ${{ matrix.os }}-bioc-${{ matrix.bioc-version}}-tarball
-          path: ${{ steps.build-install-check.outputs.source-tarball }}

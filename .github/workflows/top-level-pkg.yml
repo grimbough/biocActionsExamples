@@ -46,7 +46,7 @@ jobs:
       - name: Run BiocCheck with arguments
         uses: grimbough/bioc-actions/run-BiocCheck@v0
         with:
-          working-directory: '.'
+          package-directory: '.'
           arguments: '--no-check-bioc-views --no-check-vignettes --no-check-bioc-help'
           error-on: 'error'
 

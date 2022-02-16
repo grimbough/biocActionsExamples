@@ -48,7 +48,7 @@ jobs:
       - name: Run BiocCheck without arguments
         uses: grimbough/bioc-actions/run-BiocCheck@v0
         with:
-          working-directory: 'inst/nestedPKG'
+          package-directory: 'inst/nestedPKG'
           error-on: 'never'
           
       ## upload some results files

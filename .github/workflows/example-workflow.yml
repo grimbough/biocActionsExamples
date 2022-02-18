@@ -33,8 +33,9 @@ jobs:
         run: |
           ## todays date is use for the cache
           echo "DATE=$(date +%D)" >> $GITHUB_ENV 
-          
-      - name: Cache R packages
+        shell: bash
+        
+      - name: Cache install R packages
         uses: actions/cache@v2
         with:
           path: ${{ env.R_LIBS_USER }}
@@ -93,15 +94,16 @@ jobs:
         run: |
           ## todays date is use for the cache
           echo "DATE=$(date +%D)" >> $GITHUB_ENV 
+        shell: bash
           
-      - name: Cache R packages
+      - name: Cache install R packages
         uses: actions/cache@v2
         with:
           path: ${{ env.R_LIBS_USER }}
           key: ${{ matrix.os }}-${{ matrix.bioc-version }}-${{ env.DATE }}-1
-          restore-keys: |
-            ${{ matrix.os }}-${{ matrix.bioc-version }}-
-            
+          restore-keys: ${{ matrix.os }}-${{ matrix.bioc-version }}-
+      
+      ## Run the complete build, install, check process like the Bioc Build System
       - name: Build, Install, Check
         id: build-install-check
         uses: grimbough/bioc-actions/build-install-check@v1

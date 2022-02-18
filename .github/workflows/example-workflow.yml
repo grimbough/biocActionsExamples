@@ -9,7 +9,7 @@ env:
 
 jobs:
   pkg-at-root:
-  name: Package at root - Bioc ${{ matrix.bioc-version }} (${{ matrix.os }})
+    name: Package at root - Bioc ${{ matrix.bioc-version }} (${{ matrix.os }})
     strategy:
       fail-fast: false
       matrix:
@@ -67,7 +67,7 @@ jobs:
             ${{ steps.build-install-check.outputs.source-tarball }}
 
   pkg-in-subfolder:
-  name: Package in subfolder - Bioc ${{ matrix.bioc-version }} (${{ matrix.os }}) 
+    name: Package in subfolder - Bioc ${{ matrix.bioc-version }} (${{ matrix.os }}) 
     strategy:
       fail-fast: false
       matrix:

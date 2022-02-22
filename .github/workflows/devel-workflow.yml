@@ -1,0 +1,39 @@
+on:
+  workflow_dispatch:
+  
+name: Testing devel actions
+
+env:
+  GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+
+  pkg-in-subfolder:
+    name: Package in subfolder - Bioc ${{ matrix.bioc-version }} (${{ matrix.os }}) 
+    strategy:
+      fail-fast: false
+      matrix:
+        #os: [ubuntu-20.04, windows-2022, macos-11]
+        os: [ubuntu-20.04]
+        bioc-version: [release]
+        
+    runs-on: ${{ matrix.os }}
+    
+    steps:
+    
+      - uses: actions/checkout@v2
+      
+      ## We only using Ubuntu and BioC-release here, 
+      ## so lets use the Rstudio package manager
+      ## to install binary linux packages
+      - name: Setup R and Bioconductor
+        uses: grimbough/bioc-actions/setup-bioc@v1
+        with:
+          bioc-version: ${{ matrix.bioc-version }}
+          bioc-mirror: https://packagemanager.rstudio.com/bioconductor
+          
+      - name: Use Bioc Hub cache
+        uses: grimbough/bioc-actions/setup-bioc@devel
+          
+      - run: Sys.getenv()
+        shell: Rscript {0}

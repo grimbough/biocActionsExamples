@@ -26,14 +26,14 @@ jobs:
       ## We only using Ubuntu and BioC-release here, 
       ## so lets use the Rstudio package manager
       ## to install binary linux packages
-      - name: Setup R and Bioconductor
-        uses: grimbough/bioc-actions/setup-bioc@v1
-        with:
-          bioc-version: ${{ matrix.bioc-version }}
-          bioc-mirror: https://packagemanager.rstudio.com/bioconductor
+      #- name: Setup R and Bioconductor
+      #  uses: grimbough/bioc-actions/setup-bioc@v1
+      #  with:
+      #    bioc-version: ${{ matrix.bioc-version }}
+      #    bioc-mirror: https://packagemanager.rstudio.com/bioconductor
           
       - name: Use Bioc Hub cache
-        uses: grimbough/bioc-actions/setup-bioc@devel
+        uses: grimbough/bioc-actions/use-bioc-caches@devel
           
       - run: Sys.getenv()
         shell: Rscript {0}

@@ -68,8 +68,8 @@ jobs:
           name: ${{ matrix.os }}-bioc-${{ matrix.bioc-version}}
           path: |
             ${{ steps.build-install-check.outputs.check-dir }}
-            ${{ steps.build-install-check.outputs.pkg-tarball }}
-            ${{ steps.build-install-check.outputs.pkg-binary }}
+            ${{ steps.build-install-check.outputs.source-tarball }}
+            ${{ steps.build-install-check.outputs.package-binary }}
 
   pkg-in-subfolder:
     name: Package in subfolder - Bioc ${{ matrix.bioc-version }} (${{ matrix.os }}) 

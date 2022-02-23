@@ -17,7 +17,7 @@ library(AnnotationHub)
 ## Obtain Annotation File
 
 ```{r pressure, echo=FALSE}
-eh <- AnnotationHub()
+ah <- AnnotationHub()
 ah[["AH15146"]]
 ```
 

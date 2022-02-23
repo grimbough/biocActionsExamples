@@ -1,0 +1,19 @@
+---
+title: "Example Package Vignette"
+author: "Mike Smith"
+date: "2/23/2022"
+output: html_document
+---
+
+
+```{r cars}
+library(AnnotationHub)
+```
+
+## Obtain Annotation File
+
+```{r pressure, echo=FALSE}
+eh <- AnnotationHub()
+ah[["AH15146"]]
+```
+

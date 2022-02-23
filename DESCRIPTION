@@ -2,9 +2,9 @@ Package: biocActionsExamples
 Title: Example package to test Bioc Actions
 Version: 0.0.1
 Authors@R: 
-    person("Mike", "Smith", , "grimbough@gmail.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
+    person("Mike", "Smith", , "grimbough@gmail.com", role = c("aut", "cre"))
 Description: What the package does (one paragraph).
+Suggests: AnnotationHub
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

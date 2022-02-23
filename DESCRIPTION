@@ -4,7 +4,8 @@ Version: 0.0.1
 Authors@R: 
     person("Mike", "Smith", , "grimbough@gmail.com", role = c("aut", "cre"))
 Description: What the package does (one paragraph).
-Suggests: AnnotationHub
+Suggests: AnnotationHub, rmarkdown
+VignetteBuilder: knitr
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

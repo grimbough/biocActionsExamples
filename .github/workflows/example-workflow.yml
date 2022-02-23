@@ -28,6 +28,9 @@ jobs:
           bioc-version: ${{ matrix.bioc-version }}
           bioc-mirror: https://ftp.gwdg.de/pub/misc/bioconductor
           
+      - name: Install pandoc
+        uses: r-lib/actions/setup-pandoc@v2
+          
       - name: Set environment variables
         run: |
           ## todays date is use for the cache

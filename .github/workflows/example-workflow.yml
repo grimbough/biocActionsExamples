@@ -46,7 +46,7 @@ jobs:
             ${{ matrix.os }}-${{ matrix.bioc-version }}-
             
       - name: Install dependencies
-        run: BiocManager::install(c('AnnotationHub', 'rmarkdown', 'knitr'))
+        run: BiocManager::install(c('AnnotationHub', 'rtracklayer', 'rmarkdown', 'knitr'))
         shell: Rscript {0}
           
       - name: Build, Install, Check

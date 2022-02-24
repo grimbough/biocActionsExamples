@@ -41,7 +41,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ${{ env.R_LIBS_USER }}
-          key: ${{ matrix.os }}-${{ matrix.bioc-version }}-${{ env.DATE }}-1
+          key: ${{ matrix.os }}-${{ matrix.bioc-version }}-${{ env.DATE }}-2
           restore-keys: |
             ${{ matrix.os }}-${{ matrix.bioc-version }}-
             

@@ -23,7 +23,7 @@ jobs:
       - uses: actions/checkout@v2
           
       - name: Setup R and Bioconductor
-        uses: grimbough/bioc-actions/setup-bioc@devel
+        uses: grimbough/bioc-actions/setup-bioc@v1
         with:
           bioc-version: ${{ matrix.bioc-version }}
           bioc-mirror: https://ftp.gwdg.de/pub/misc/bioconductor
@@ -39,7 +39,7 @@ jobs:
           
       - name: Build, Install, Check
         id: build-install-check
-        uses: grimbough/bioc-actions/build-install-check@devel
+        uses: grimbough/bioc-actions/build-install-check@v1
         with:
           package-directory: '.'
       
@@ -90,7 +90,10 @@ jobs:
           ## todays date is use for the cache
           echo "DATE=$(date +%D)" >> $GITHUB_ENV 
         shell: bash
-          
+        
+      ## create a cache for installed package.  We use the bioc version 
+      ## and todays date as the key.  A new cache will be created tomorrow
+      ## if we install new/different packages
       - name: Cache install R packages
         uses: actions/cache@v2
         with:

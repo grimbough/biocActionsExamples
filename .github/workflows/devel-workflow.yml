@@ -27,12 +27,12 @@ jobs:
       ## We only using Ubuntu and BioC-release here, 
       ## so lets use the Rstudio package manager
       ## to install binary linux packages
-      - name: Setup R and Bioconductor
-        if: matrix.image == null
-        uses: grimbough/bioc-actions/setup-bioc@devel
-        with:
-          bioc-version: ${{ matrix.bioc-version }}
-          bioc-mirror: https://packagemanager.rstudio.com/bioconductor
+      #- name: Setup R and Bioconductor
+      #  if: matrix.image == null
+      #  uses: grimbough/bioc-actions/setup-bioc@devel
+      #  with:
+      #    bioc-version: ${{ matrix.bioc-version }}
+      #    bioc-mirror: https://packagemanager.rstudio.com/bioconductor
           
       - name: Set environment variables
         run: |

@@ -16,8 +16,10 @@ jobs:
         #os: [ubuntu-20.04, windows-2022, macos-11]
         os: [ubuntu-20.04]
         bioc-version: [release]
+        image: bioconductor/bioconductor_docker:RELEASE_3_14
         
     runs-on: ${{ matrix.os }}
+    container: ${{ matrix.image }}
     
     steps:
     
@@ -27,7 +29,8 @@ jobs:
       ## so lets use the Rstudio package manager
       ## to install binary linux packages
       - name: Setup R and Bioconductor
-        uses: grimbough/bioc-actions/setup-bioc@v1
+        if: matrix.image == null
+        uses: grimbough/bioc-actions/setup-bioc@devel
         with:
           bioc-version: ${{ matrix.bioc-version }}
           bioc-mirror: https://packagemanager.rstudio.com/bioconductor
@@ -46,13 +49,10 @@ jobs:
           restore-keys: |
             ${{ matrix.os }}-${{ matrix.bioc-version }}-
           
-      - name: Use Bioc Hub cache
-        uses: grimbough/bioc-actions/use-bioc-caches@devel
+      - name: Run BiocCheck without arguments
+        uses: grimbough/bioc-actions/run-BiocCheck@devel
+        with:
+          package-directory: 'inst/nestedPKG'
+          error-on: 'never'
           
-      - run: |
-          Sys.getenv()
-          BiocManager::install('ExperimentHub', quiet = TRUE, update = FALSE)
-          eh <- ExperimentHub::ExperimentHub(); 
-          dat <- eh[["EH166"]]; 
-          dat
-        shell: Rscript {0}
+

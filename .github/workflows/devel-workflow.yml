@@ -40,13 +40,13 @@ jobs:
           echo "DATE=$(date +%D)" >> $GITHUB_ENV 
         shell: bash
         
-      - name: Cache install R packages
-        uses: actions/cache@v2
-        with:
-          path: ${{ env.R_LIBS_USER }}
-          key: ${{ matrix.os }}-${{ matrix.bioc-version }}-${{ env.DATE }}-1
-          restore-keys: |
-            ${{ matrix.os }}-${{ matrix.bioc-version }}-
+      #- name: Cache install R packages
+      #  uses: actions/cache@v2
+      #  with:
+      #    path: ${{ env.R_LIBS_USER }}
+       #   key: ${{ matrix.os }}-${{ matrix.bioc-version }}-${{ env.DATE }}-1
+      #    restore-keys: |
+      #      ${{ matrix.os }}-${{ matrix.bioc-version }}-
           
       - name: Run BiocCheck without arguments
         uses: grimbough/bioc-actions/run-BiocCheck@devel

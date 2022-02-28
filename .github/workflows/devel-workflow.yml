@@ -9,7 +9,7 @@ env:
 jobs:
 
   pkg-in-subfolder:
-    name: Package in subfolder - Bioc ${{ matrix.bioc-version }} (${{ matrix.os }}) 
+    name: Testing bioc-actions
     strategy:
       fail-fast: false
       matrix:
@@ -38,6 +38,11 @@ jobs:
         run: |
           ## todays date is use for the cache
           echo "DATE=$(date +%D)" >> $GITHUB_ENV 
+        shell: bash
+        
+      - name: Testing
+        run: |
+          echo ${{ env.BIOCONDUCTOR_DOCKER_VERSION }}
         shell: bash
         
       #- name: Cache install R packages

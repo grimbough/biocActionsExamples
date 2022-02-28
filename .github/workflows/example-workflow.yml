@@ -126,7 +126,7 @@ jobs:
             ${{ steps.build-install-check.outputs.check-dir }}
 
   using-bioc-docker:
-    name: 
+    name: Docker Devel
     strategy:
       fail-fast: false
 
@@ -140,9 +140,8 @@ jobs:
       ## no need to install R, BiocManager, Pandoc, Latex etc
           
       - name: Install dependencies
-        uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          cache-version: 1
+        run: AnVIL::install(c('AnnotationHub', 'rtracklayer', 'knitr', 'rmarkdown'))
+        shell: Rscript {0}
           
       - name: Build, Install, Check
         id: build-install-check

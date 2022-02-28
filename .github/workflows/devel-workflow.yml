@@ -43,6 +43,7 @@ jobs:
       - name: Testing
         run: |
           echo ${{ env.BIOCONDUCTOR_DOCKER_VERSION }}
+          echo ${BIOCONDUCTOR_DOCKER_VERSION}
         shell: bash
         
       #- name: Cache install R packages

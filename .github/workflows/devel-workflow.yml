@@ -16,7 +16,7 @@ jobs:
         #os: [ubuntu-20.04, windows-2022, macos-11]
         os: [ubuntu-20.04]
         bioc-version: [release]
-        image: bioconductor/bioconductor_docker:RELEASE_3_14
+        image: [bioconductor/bioconductor_docker:RELEASE_3_14]
         
     runs-on: ${{ matrix.os }}
     container: ${{ matrix.image }}

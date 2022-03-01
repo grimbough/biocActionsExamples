@@ -58,6 +58,14 @@ jobs:
           arguments: '--no-check-bioc-views --no-check-vignettes --no-check-bioc-help'
           error-on: 'error'
 
-
+      ## upload some results files
+      - name: Upload check output
+        uses: actions/upload-artifact@v2
+        with:
+          name: docker-results
+          path: |
+            ${{ steps.build-install-check.outputs.check-dir }}
+            ${{ steps.build-install-check.outputs.source-tarball }}
+            ${{ steps.build-install-check.outputs.package-binary }}
           
 

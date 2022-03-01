@@ -141,6 +141,14 @@ jobs:
       ## no need to install R, BiocManager, or Pandoc ##
       ##################################################
       
+      ## cache installed packages
+      - name: Cache install R packages
+        uses: actions/cache@v2
+        with:
+          path: /usr/local/lib/R/site-library
+          key: docker-1
+          restore-keys: docker-
+      
       ## we can use AnVIL to install binary packages in the Docker container
       - name: Install dependencies
         run: AnVIL::install(c('AnnotationHub', 'rtracklayer', 'knitr', 'rmarkdown'))
@@ -161,3 +169,9 @@ jobs:
           arguments: '--no-check-bioc-views --no-check-vignettes --no-check-bioc-help'
           error-on: 'error'
 
+      - name: Upload built package binary
+        uses: actions/upload-artifact@v2
+        with:
+          name: docker-binary
+          path: |
+            ${{ steps.build-install-check.outputs.package-binary }}

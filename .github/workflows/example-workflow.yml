@@ -151,7 +151,10 @@ jobs:
       
       ## we can use AnVIL to install binary packages in the Docker container
       - name: Install dependencies
-        run: AnVIL::install(c('AnnotationHub', 'rtracklayer', 'knitr', 'rmarkdown'))
+        run: |
+            install.packages('BiocManager')
+            BiocManager::install('AnVIL')
+            AnVIL::install(c('AnnotationHub', 'rtracklayer', 'knitr', 'rmarkdown'))
         shell: Rscript {0}
           
       - name: Build, Install, Check

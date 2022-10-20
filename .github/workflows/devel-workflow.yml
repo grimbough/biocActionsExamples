@@ -22,7 +22,7 @@ jobs:
 
     steps:
     
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       
       ##################################################
       ## no need to install R, BiocManager, or Pandoc ##
@@ -32,7 +32,7 @@ jobs:
       ## and todays date as the key.  A new cache will be created tomorrow
       ## if we install new/different packages
       - name: Cache install R packages
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: /usr/local/lib/R/site-library
           key: docker-1
@@ -60,7 +60,7 @@ jobs:
 
       ## upload some results files
       - name: Upload check output
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: docker-results
           path: |

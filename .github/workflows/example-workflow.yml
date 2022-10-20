@@ -20,7 +20,7 @@ jobs:
     
     steps:
     
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
           
       - name: Setup R and Bioconductor
         uses: grimbough/bioc-actions/setup-bioc@v1
@@ -54,7 +54,7 @@ jobs:
 
       ## upload some results files
       - name: Upload check output
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: ${{ matrix.os }}-bioc-${{ matrix.bioc-version}}
           path: |
@@ -74,7 +74,7 @@ jobs:
     
     steps:
     
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       
       ## We only using Ubuntu and BioC-release here, 
       ## so lets use the Rstudio package manager
@@ -95,7 +95,7 @@ jobs:
       ## and todays date as the key.  A new cache will be created tomorrow
       ## if we install new/different packages
       - name: Cache install R packages
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ${{ env.R_LIBS_USER }}
           key: ${{ matrix.os }}-${{ matrix.bioc-version }}-${{ env.DATE }}-1
@@ -118,7 +118,7 @@ jobs:
           
       ## upload the Rcheck folder if the workflow fails
       - name: Upload output
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         if: failure()
         with:
           name: ${{ matrix.os }}-bioc-${{ matrix.bioc-version}}-sub_folder
@@ -135,7 +135,7 @@ jobs:
     
     steps:
     
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       
       ##################################################
       ## no need to install R, BiocManager, or Pandoc ##
@@ -143,7 +143,7 @@ jobs:
       
       ## cache installed packages
       - name: Cache install R packages
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: /usr/local/lib/R/site-library
           key: docker-1
@@ -173,7 +173,7 @@ jobs:
           error-on: 'error'
 
       - name: Upload built package binary
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: docker-binary
           path: |

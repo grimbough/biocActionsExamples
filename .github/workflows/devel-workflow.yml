@@ -88,7 +88,8 @@ jobs:
       - name: Install dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          cache-version: 1
+          cache-version: 2
+          working-directory: 'inst/nestedPKG'
       
       ## Run the complete build, install, check process like the Bioc Build System
       - name: Build, Install, Check

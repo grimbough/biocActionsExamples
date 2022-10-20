@@ -138,12 +138,10 @@ jobs:
           key: docker-1
           restore-keys: docker-
       
-      ## we can use AnVIL to install binary packages in the Docker container
+      ## we can use BiocManager will install binary packages in the Docker container
       - name: Install dependencies
         run: |
-            install.packages('BiocManager')
-            BiocManager::install('AnVIL')
-            AnVIL::install(c('AnnotationHub', 'rtracklayer', 'knitr', 'rmarkdown'))
+            BiocManager::install(c('AnnotationHub', 'rtracklayer', 'knitr', 'rmarkdown'))
         shell: Rscript {0}
           
       - name: Build, Install, Check

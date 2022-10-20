@@ -85,21 +85,10 @@ jobs:
           bioc-version: ${{ matrix.bioc-version }}
           bioc-mirror: https://packagemanager.rstudio.com/bioconductor
           
-      - name: Set environment variables
-        run: |
-          ## todays date is use for the cache
-          echo "DATE=$(date +%D)" >> $GITHUB_ENV 
-        shell: bash
-        
-      ## create a cache for installed package.  We use the bioc version 
-      ## and todays date as the key.  A new cache will be created tomorrow
-      ## if we install new/different packages
-      - name: Cache install R packages
-        uses: actions/cache@v3
+      - name: Install dependencies
+        uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          path: ${{ env.R_LIBS_USER }}
-          key: ${{ matrix.os }}-${{ matrix.bioc-version }}-${{ env.DATE }}-1
-          restore-keys: ${{ matrix.os }}-${{ matrix.bioc-version }}-
+          cache-version: 1
       
       ## Run the complete build, install, check process like the Bioc Build System
       - name: Build, Install, Check

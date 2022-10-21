@@ -9,7 +9,7 @@ env:
 jobs:
 
   pkg-in-subfolder:
-    name: Testing bioc-actions
+    name: Test bioc-actions - ${{ matrix.pkg }}
     strategy:
       fail-fast: false
       matrix:
@@ -70,5 +70,12 @@ jobs:
             ${{ steps.build-install-check.outputs.check-dir }}
             ${{ steps.build-install-check.outputs.source-tarball }}
             ${{ steps.build-install-check.outputs.package-binary }}
-          
 
+          
+      - name: Upload install log if that step fails
+        if: always() && (steps.build-install-check.outcome == 'failure')
+        uses: action/upload-artifact@v3
+        with: 
+          name: install-log
+          path: |
+            ${{ steps.build-install-check.outputs.install-log }}

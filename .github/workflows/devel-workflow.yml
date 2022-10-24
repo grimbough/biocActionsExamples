@@ -32,10 +32,15 @@ jobs:
       - name: Install pandoc
         uses: r-lib/actions/setup-pandoc@v2
           
+      # - name: Install dependencies
+      #   uses: r-lib/actions/setup-r-dependencies@v2
+      #   with:
+      #     cache-version: 1
+      
       - name: Install dependencies
-        uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          cache-version: 1
+        run: |
+            BiocManager::install(c('AnnotationHub', 'rtracklayer', 'knitr', 'rmarkdown'))
+        shell: Rscript {0}
           
       - name: Build, Install, Check
         id: build-install-check
@@ -94,11 +99,16 @@ jobs:
           bioc-version: ${{ matrix.bioc-version }}
           bioc-mirror: https://packagemanager.rstudio.com/bioconductor
           
+      # - name: Install dependencies
+      #   uses: r-lib/actions/setup-r-dependencies@v2
+      #   with:
+      #     cache-version: 2
+      #     working-directory: 'inst/nestedPKG'
+          
       - name: Install dependencies
-        uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          cache-version: 2
-          working-directory: 'inst/nestedPKG'
+        run: |
+            BiocManager::install(c('knitr', 'rmarkdown'))
+        shell: Rscript {0}
       
       ## Run the complete build, install, check process like the Bioc Build System
       - name: Build, Install, Check
@@ -184,4 +194,4 @@ jobs:
           name: install-log
           path: |
             ${{ steps.build-install-check.outputs.install-log }}
-
+            

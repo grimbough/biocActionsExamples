@@ -72,7 +72,7 @@ jobs:
         if: always() && (steps.build-install-check.outcome == 'failure')
         uses: actions/upload-artifact@v3
         with: 
-          name: install-log
+          name: ${{ matrix.os }}-bioc-${{ matrix.bioc-version}}-install_log
           path: |
             ${{ steps.build-install-check.outputs.install-log }}
 
@@ -133,6 +133,14 @@ jobs:
           name: ${{ matrix.os }}-bioc-${{ matrix.bioc-version}}-sub_folder
           path: |
             ${{ steps.build-install-check.outputs.check-dir }}
+            
+      - name: Upload install log if that step fails
+        if: always() && (steps.build-install-check.outcome == 'failure')
+        uses: actions/upload-artifact@v3
+        with: 
+          name: ${{ matrix.os }}-bioc-${{ matrix.bioc-version}}-sub_folder-install_log
+          path: |
+            ${{ steps.build-install-check.outputs.install-log }}
 
   using-bioc-docker:
     name: Docker Devel
@@ -186,12 +194,11 @@ jobs:
           path: |
             ${{ steps.build-install-check.outputs.package-binary }}
             
-
       - name: Upload install log if that step fails
         if: always() && (steps.build-install-check.outcome == 'failure')
         uses: actions/upload-artifact@v3
         with: 
-          name: install-log
+          name: docker-install-log
           path: |
             ${{ steps.build-install-check.outputs.install-log }}
             

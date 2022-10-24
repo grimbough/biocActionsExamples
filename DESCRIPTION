@@ -4,9 +4,10 @@ Version: 0.0.1
 Authors@R: 
     person("Mike", "Smith", , "grimbough@gmail.com", role = c("aut", "cre"))
 Description: What the package does (one paragraph).
-Suggests: AnnotationHub, rtracklayer, knitr, rmarkdown, Matrix.utils 
+Suggests: AnnotationHub, rtracklayer, knitr, rmarkdown
 VignetteBuilder: knitr
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
+Imports: Matrix.utils

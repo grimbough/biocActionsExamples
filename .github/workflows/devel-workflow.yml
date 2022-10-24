@@ -61,6 +61,15 @@ jobs:
             ${{ steps.build-install-check.outputs.check-dir }}
             ${{ steps.build-install-check.outputs.source-tarball }}
             ${{ steps.build-install-check.outputs.package-binary }}
+            
+
+      - name: Upload install log if that step fails
+        if: always() && (steps.build-install-check.outcome == 'failure')
+        uses: actions/upload-artifact@v3
+        with: 
+          name: install-log
+          path: |
+            ${{ steps.build-install-check.outputs.install-log }}
 
   pkg-in-subfolder:
     name: Subfolder Pkg - Bioc ${{ matrix.bioc-version }} (${{ matrix.os }}) 
@@ -166,3 +175,13 @@ jobs:
           name: docker-binary
           path: |
             ${{ steps.build-install-check.outputs.package-binary }}
+            
+
+      - name: Upload install log if that step fails
+        if: always() && (steps.build-install-check.outcome == 'failure')
+        uses: actions/upload-artifact@v3
+        with: 
+          name: install-log
+          path: |
+            ${{ steps.build-install-check.outputs.install-log }}
+

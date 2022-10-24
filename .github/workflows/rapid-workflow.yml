@@ -43,7 +43,7 @@ jobs:
       
       ## we can use BiocManager to install binary packages in the Docker container
       - name: Install dependencies
-        run: BiocManager::install(c('AnnotationHub', 'rtracklayer', 'knitr', 'rmarkdown'))
+        run: BiocManager::install(c('AnnotationHub', 'rtracklayer', 'knitr'))
         shell: Rscript {0}
           
       - name: Build, Install, Check
@@ -71,7 +71,6 @@ jobs:
             ${{ steps.build-install-check.outputs.source-tarball }}
             ${{ steps.build-install-check.outputs.package-binary }}
 
-          
       - name: Upload install log if that step fails
         if: always() && (steps.build-install-check.outcome == 'failure')
         uses: actions/upload-artifact@v3

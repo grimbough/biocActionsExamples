@@ -31,16 +31,6 @@ jobs:
       ## so this should be Bioc Devel
       ##################################################
       
-      ## create a cache for installed package.  We use the bioc version 
-      ## and todays date as the key.  A new cache will be created tomorrow
-      ## if we install new/different packages
-      - name: Cache install R packages
-        uses: actions/cache@v3
-        with:
-          path: /usr/local/lib/R/site-library
-          key: docker-1
-          restore-keys: docker-
-      
       ## we can use BiocManager to install binary packages in the Docker container
       - name: Install dependencies
         run: BiocManager::install(c('AnnotationHub', 'rtracklayer', 'knitr'))

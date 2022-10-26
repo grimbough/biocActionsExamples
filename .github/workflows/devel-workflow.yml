@@ -27,7 +27,7 @@ jobs:
         with:
           bioc-version: ${{ matrix.bioc-version }}
           bioc-mirror: https://ftp.gwdg.de/pub/misc/bioconductor
-          use-public-rspm: true
+          use-public-rspm: false
           
       - name: Install pandoc
         uses: r-lib/actions/setup-pandoc@v2
@@ -98,7 +98,7 @@ jobs:
         with:
           bioc-version: ${{ matrix.bioc-version }}
           bioc-mirror: https://packagemanager.rstudio.com/bioconductor
-          
+
       - name: Install dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
         with:

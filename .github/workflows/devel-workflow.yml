@@ -147,7 +147,6 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-20.04, windows-2022, macos-11]
         ## Test using both Bioconductor devel and release
         bioc-version: [devel, RELEASE_3_15]
 

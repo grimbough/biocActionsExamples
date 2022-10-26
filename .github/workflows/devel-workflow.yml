@@ -27,7 +27,7 @@ jobs:
         with:
           bioc-version: ${{ matrix.bioc-version }}
           bioc-mirror: https://ftp.gwdg.de/pub/misc/bioconductor
-          use-public-rspm: false
+          use-public-rspm: true
           
       - name: Install pandoc
         uses: r-lib/actions/setup-pandoc@v2
@@ -146,9 +146,13 @@ jobs:
     name: Docker Devel
     strategy:
       fail-fast: false
+      matrix:
+        os: [ubuntu-20.04, windows-2022, macos-11]
+        ## Test using both Bioconductor devel and release
+        bioc-version: [devel, RELEASE_3_15]
 
     runs-on: ubuntu-20.04
-    container: bioconductor/bioconductor_docker:devel
+    container: bioconductor/bioconductor_docker:${{ matrix.bioc-version }}
     
     steps:
     

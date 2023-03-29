@@ -37,11 +37,6 @@ jobs:
         with:
           cache-version: 1
       
-      # - name: Install dependencies
-      #   run: |
-      #       BiocManager::install(c('AnnotationHub', 'rtracklayer', 'knitr', 'rmarkdown'))
-      #   shell: Rscript {0}
-          
       - name: Build, Install, Check
         id: build-install-check
         uses: grimbough/bioc-actions/build-install-check@devel

@@ -52,13 +52,21 @@ jobs:
           arguments: '--no-check-bioc-views --no-check-vignettes --no-check-bioc-help'
           error-on: 'error'
 
-      ## upload some results files
+      ## upload the Rcheck folder regardless of success of failure
+      - name: Upload output
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: ${{ matrix.os }}-bioc-${{ matrix.bioc-version}}-Rcheck
+          path: |
+            ${{ steps.build-install-check.outputs.check-dir }}
+
+      ## upload source and binary packages
       - name: Upload check output
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ matrix.os }}-bioc-${{ matrix.bioc-version}}
+          name: ${{ matrix.os }}-bioc-${{ matrix.bioc-version}}-pkgs
           path: |
-            ${{ steps.build-install-check.outputs.check-dir }}
             ${{ steps.build-install-check.outputs.source-tarball }}
             ${{ steps.build-install-check.outputs.package-binary }}
             

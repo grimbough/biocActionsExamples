@@ -4,7 +4,7 @@ Version: 0.0.2
 Authors@R: 
     person("Mike", "Smith", , "grimbough@gmail.com", role = c("aut", "cre"))
 Description: What the package does (one paragraph).
-Suggests: AnnotationHub, rtracklayer, BiocStyle
+Suggests: AnnotationHub, rtracklayer, BiocStyle, knitr
 VignetteBuilder: knitr
 License: MIT + file LICENSE
 Encoding: UTF-8

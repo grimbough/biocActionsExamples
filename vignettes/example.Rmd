@@ -1,7 +1,6 @@
 ---
 title: "Example Package Vignette"
 author: "Mike Smith"
-date: "2/23/2022"
 output: BiocStyle::html_document
 vignette: >
   %\VignetteIndexEntry{Example Package Vignette}
@@ -16,12 +15,14 @@ library(AnnotationHub)
 
 ## Obtain Annotation File
 
-```{r pressure, echo=FALSE}
+```{r annotationhub, echo=FALSE}
 ah <- AnnotationHub()
 ah[["AH15146"]]
 ```
 
 
-```{r plotting}
+```{r plotting, fig.dim = c(10, 4)}
 plot(1:10)
 ```
+
+

@@ -149,7 +149,7 @@ jobs:
       ## we can use BiocManager will install binary packages in the Docker container
       - name: Install dependencies
         run: |
-            BiocManager::install(c('AnnotationHub', 'rtracklayer', 'knitr', 'rmarkdown'))
+            BiocManager::install(c('AnnotationHub', 'rtracklayer', 'knitr', 'rmarkdown', 'BiocStyle'))
         shell: Rscript {0}
           
       - name: Build, Install, Check

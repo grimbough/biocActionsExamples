@@ -21,7 +21,7 @@ ah[["AH15146"]]
 ```
 
 
-```{r plotting, fig.dim = c(10, 4)}
+```{r echo=TRUE, message=FALSE, fig.dim = c(10, 4)}
 plot(1:10)
 ```
 

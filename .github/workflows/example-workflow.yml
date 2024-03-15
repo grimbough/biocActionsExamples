@@ -12,7 +12,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-22.04, windows-2022, macos-12]
+        os: [ubuntu-22.04, windows-2022, macos-13]
         ## Test using both Bioconductor devel and release
         bioc-version: [devel, release]
 
@@ -20,7 +20,7 @@ jobs:
     
     steps:
     
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
           
       - name: Setup R and Bioconductor
         uses: grimbough/bioc-actions/setup-bioc@v1
@@ -54,7 +54,7 @@ jobs:
           
       ## upload the Rcheck folder regardless of success of failure
       - name: Upload output
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: ${{ matrix.os }}-bioc-${{ matrix.bioc-version}}-Rcheck
@@ -82,7 +82,7 @@ jobs:
     
     steps:
     
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       
       ## We only using Ubuntu and BioC-release here, 
       ## so lets use the Rstudio package manager
@@ -115,7 +115,7 @@ jobs:
           
       ## upload the Rcheck folder if the workflow fails
       - name: Upload output
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: ${{ matrix.os }}-bioc-${{ matrix.bioc-version}}-sub_folder
@@ -132,7 +132,7 @@ jobs:
     
     steps:
     
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       
       ##################################################
       ## no need to install R, BiocManager, or Pandoc ##
@@ -168,7 +168,7 @@ jobs:
           error-on: 'error'
 
       - name: Upload built package binary
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: docker-binary
           path: |

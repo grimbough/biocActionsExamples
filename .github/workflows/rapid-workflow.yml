@@ -23,18 +23,19 @@ jobs:
 
     steps:
     
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       
-      ##################################################
-      ## no need to install R, BiocManager, or Pandoc 
-      ## The come in the docker container.  We're using the devel container
-      ## so this should be Bioc Devel
-      ##################################################
+      - name: Setup R and Bioconductor
+        uses: grimbough/bioc-actions/setup-bioc@devel
+        with:
+          bioc-version: ${{ matrix.bioc-version }}
+          bioc-mirror: https://ftp.gwdg.de/pub/misc/bioconductor
+          use-public-rspm: false
       
-      ## we can use BiocManager to install binary packages in the Docker container
       - name: Install dependencies
-        run: BiocManager::install(c('knitr'))
-        shell: Rscript {0}
+        uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          cache-version: 1
           
       - name: Build, Install, Check
         id: build-install-check

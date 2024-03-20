@@ -12,7 +12,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-22.04, windows-2022, macos-11]
+        os: [ubuntu-20.04, ubuntu-22.04, windows-2019, windows-2022, macos-11, macos-12, macos-13, macos-14]
         ## Test using both Bioconductor devel and release
         bioc-version: [devel, release]
 
@@ -20,7 +20,7 @@ jobs:
     
     steps:
     
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
           
       - name: Setup R and Bioconductor
         uses: grimbough/bioc-actions/setup-bioc@devel
@@ -54,7 +54,7 @@ jobs:
 
       ## upload the Rcheck folder regardless of success of failure
       - name: Upload output
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: ${{ matrix.os }}-bioc-${{ matrix.bioc-version}}-Rcheck
@@ -63,7 +63,7 @@ jobs:
 
       ## upload source and binary packages
       - name: Upload check output
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.os }}-bioc-${{ matrix.bioc-version}}-pkgs
           path: |
@@ -73,7 +73,7 @@ jobs:
 
       - name: Upload install log if that step fails
         if: always() && (steps.build-install-check.outcome == 'failure')
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with: 
           name: ${{ matrix.os }}-bioc-${{ matrix.bioc-version}}-install_log
           path: |
@@ -91,7 +91,7 @@ jobs:
     
     steps:
     
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       
       ## We only using Ubuntu and BioC-release here, 
       ## so lets use the Rstudio package manager
@@ -130,7 +130,7 @@ jobs:
           
       ## upload the Rcheck folder if the workflow fails
       - name: Upload output
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: ${{ matrix.os }}-bioc-${{ matrix.bioc-version}}-sub_folder
@@ -139,7 +139,7 @@ jobs:
             
       - name: Upload install log if that step fails
         if: always() && (steps.build-install-check.outcome == 'failure')
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with: 
           name: ${{ matrix.os }}-bioc-${{ matrix.bioc-version}}-sub_folder-install_log
           path: |
@@ -151,14 +151,14 @@ jobs:
       fail-fast: false
       matrix:
         ## Test using both Bioconductor devel and release
-        bioc-version: [devel, RELEASE_3_16]
+        bioc-version: [devel, RELEASE_3_18]
 
     runs-on: ubuntu-22.04
     container: bioconductor/bioconductor_docker:${{ matrix.bioc-version }}
     
     steps:
     
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       
       ##################################################
       ## no need to install R, BiocManager, or Pandoc ##
@@ -166,7 +166,7 @@ jobs:
       
       ## cache installed packages
       - name: Cache install R packages
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: /usr/local/lib/R/site-library
           key: docker-1
@@ -194,7 +194,7 @@ jobs:
           error-on: 'error'
 
       - name: Upload built package binary
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: docker-binary
           path: |
@@ -202,7 +202,7 @@ jobs:
             
       - name: Upload install log if that step fails
         if: always() && (steps.build-install-check.outcome == 'failure')
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with: 
           name: docker-install-log
           path: |

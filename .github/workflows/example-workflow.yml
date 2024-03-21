@@ -63,7 +63,7 @@ jobs:
 
       ## upload source and binary packages
       - name: Upload check output
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.os }}-bioc-${{ matrix.bioc-version}}-pkgs
           path: |
@@ -140,7 +140,7 @@ jobs:
       
       ## cache installed packages
       - name: Cache install R packages
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: /usr/local/lib/R/site-library
           key: docker-1

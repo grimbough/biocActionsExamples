@@ -12,7 +12,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-20.04, ubuntu-22.04, windows-2019, windows-2022, macos-11, macos-12, macos-13, macos-14]
+        os: [ubuntu-22.04, ubuntu-24.04, windows-2019, windows-2022, macos-13, macos-14]
         ## Test using both Bioconductor devel and release
         bioc-version: [devel, release]
 
@@ -151,7 +151,7 @@ jobs:
       fail-fast: false
       matrix:
         ## Test using both Bioconductor devel and release
-        bioc-version: [devel, RELEASE_3_18]
+        bioc-version: [devel, RELEASE_3_20]
 
     runs-on: ubuntu-22.04
     container: bioconductor/bioconductor_docker:${{ matrix.bioc-version }}
